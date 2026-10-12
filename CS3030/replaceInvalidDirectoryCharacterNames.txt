@@ -1,0 +1,3 @@
+    # Replace invalid characters in directory name (e.g., <, >, :, ", /, \, |, ?, *)
+
+    dir_name = re.sub(r'[<>:"/\\|?*]', '_', dir_name)

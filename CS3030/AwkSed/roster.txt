@@ -1,0 +1,8 @@
+StudentID,FirstName,LastName,Email,Phone,Major
+101,Ava,Thompson,ava.thompson22@example.edu,503-555-8471,Computer Science
+102,Liam,Patel,liam.patel.tech@example.edu,303-555-3190,Data Science
+103,Sophia,Chen,s.chen.university@example.edu,206-555-6742,Biology
+104,Ethan,Martinez,ethan.m92@example.edu,512-555-1289,Mechanical Engineering
+105,Noah,Kim,noah.kim.music@example.edu,404-555-2914,Music Performance
+106,Isabella,Rodriguez,isa.rodriguez@example.edu,602-555-7632,Psychology
+107,Mason,Lee,mason.lee.dev@example.edu,305-555-1947,Software Engineering

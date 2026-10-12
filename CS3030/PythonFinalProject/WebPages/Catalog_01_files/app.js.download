@@ -1,0 +1,107 @@
+jQuery(document).ready(function(){
+	// Sets height of off canvas menu to height of window
+	//windowHeight = jQuery(window).height();
+	//jQuery('.inner-wrap').css('min-height', windowHeight);
+
+	if(jQuery('.hero').length){
+		jQuery('.hero').slick({
+			dots: true,
+			autoplay: true,
+			autoplaySpeed: 6000,
+			fade: true
+		});
+	};
+
+
+
+	// Makes content of <code> tags selected on click.
+	jQuery.fn.selectText = function(){
+		var doc = document
+			, element = this[0]
+			, range, selection
+		;
+		if (doc.body.createTextRange) {
+			range = document.body.createTextRange();
+			range.moveToElementText(element);
+			range.select();
+		} else if (window.getSelection) {
+			selection = window.getSelection();
+			range = document.createRange();
+			range.selectNodeContents(element);
+			selection.removeAllRanges();
+			selection.addRange(range);
+		}
+	};
+	jQuery(function() {
+		jQuery('code').click(function(e) {
+			jQuery(this).selectText();
+		});
+	});
+
+	// Removes attributes from tags
+	jQuery.fn.removeAttributes = function() {
+	  return this.each(function() {
+		var attributes = $.map(this.attributes, function(item) {
+		  return item.name;
+		});
+		var img = jQuery(this);
+		$.each(attributes, function(i, item) {
+		img.removeAttr(item);
+		});
+	  });
+	}
+
+	// Adds style to left nav labels
+	jQuery('li[data-val="-1"]').addClass("left-nav-label");
+
+	//Remove border from portalapps toolbar
+	jQuery(".BackgroundSecondary").removeAttr("style");
+
+
+	jQuery(".main-content *").css("font-size", "");
+	jQuery(".main-content *").css("font-family", "");
+	jQuery(".main-content *").removeAttr("font");
+	jQuery(".main-content *").removeAttr("face");
+	jQuery(".main-content *").removeAttr("size");
+	jQuery(".main-content *").removeAttr("pointsize");
+	jQuery(".main-content img").css("height", "");
+	//jQuery(".main-content font").removeAttributes();
+	//jQuery(".main-content span").removeAttributes();
+	//jQuery(".main-content div").removeAttributes();
+	jQuery(".main-content td, .main-content th, .main-content tbody, .main-content table, .main-content img, .template-header img, .main-content input").removeAttr("height");
+	jQuery(".main-content td, .main-content th, .main-content tbody, .main-content table, .main-content img, .template-header img, .main-content input").removeAttr("width");
+	jQuery(".main-content td, .main-content th, .main-content tbody, .main-content table, .main-content img, .template-header img, .main-content input").css("width", "");
+	jQuery(".main-content td, .main-content th, .main-content tbody, .main-content table, .main-content img, .template-header img, .main-content input").css("height", "");
+	//jQuery(".main-content *").removeAttr("style");
+	jQuery("#contentBody table").removeAttr("style");
+
+	jQuery(".main-content table").attr("width", "100%");
+
+	jQuery(".main-content td, .main-content th").each(function() {
+		var $this = jQuery(this);
+		$this.html($this.html().replace(/&nbsp;/g, ' '));
+	});
+
+	// Foundation JavaScript
+	// Documentation can be found at: http://foundation.zurb.com/docs
+	jQuery(document).foundation();
+
+	var sUrl = location.href.toLowerCase();
+	jQuery(".top-bar .right li a").each(function () {
+	    if (!jQuery(this).parent().hasClass('has-dropdown')) {
+	        if (this.href.toLowerCase() == sUrl) {
+	            jQuery(this).parent().addClass("active");
+	            jQuery(this).parents(".has-dropdown").addClass("active-parent");
+	        }
+	    }
+	});
+
+	jQuery(".side-nav-desktop li > a").each(function () {
+        if (this.href.toLowerCase() == sUrl) {
+	        jQuery(this).parent().addClass("active");
+	    }
+	})
+});
+function translateURL() {
+	window.open("http://translate.google.com/translate?sl=en&tl=es&u=" + self.location, "translateWin", "width=900,height=600,left=20,top=20,scrollbars=1,menubar=0,resizable=1,location=0,toolbar=1");
+};

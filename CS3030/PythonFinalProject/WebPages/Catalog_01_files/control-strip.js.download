@@ -1,0 +1,280 @@
+// JavaScript Document
+jQuery(document).ready(function(e) {
+
+	jQuery(".show-w-number").click(function() {
+		jQuery(".show-w-number").hide();
+		jQuery(".w-number").show();
+	});
+
+
+	jQuery(".photo-holder").hover(function(){
+		jQuery(".edit-picture").toggle();
+	});
+
+
+	// Keeps dropdown on screen
+	DetectDropdownEdge();
+	jQuery(window).resize(function () {
+	    DetectDropdownEdge();
+	});
+	function DetectDropdownEdge() {
+	    if (jQuery(window).width() >= 1008) {
+	        jQuery("li.has-dropdown ul").each(function () {
+	            if (isEntirelyVisible(jQuery(this))) {
+                    //Dropdown shows completely on screen
+	                jQuery(this).removeClass('edge');
+	            } else {
+                    //Dropdown is off-screen
+	                jQuery(this).addClass('edge');
+	            }
+	        });
+	    } else {
+            //Remove .edge for mobile views
+	        jQuery("li.has-dropdown ul.edge").removeClass("edge");
+	    }
+	}
+	function isEntirelyVisible(obj) {
+	    var objOffset = obj.offset();
+
+	    return (objOffset.left - obj.width() > 0);
+	}
+
+	//if icon cover is clicked flash highlight on button to indicate action required
+	jQuery(".cover-icons").click(function() {
+	   jQuery(".wsu-alert-desktop .button").addClass("cover-clicked");
+
+		var delay = setTimeout(function(){
+			jQuery(".wsu-alert-desktop .button").removeClass("cover-clicked");
+		 }, 200)
+	});
+
+	jQuery(document).click(function (e){
+		var container = jQuery("#notificationsDropdown, #notificationsButton");
+		if (!container.is(e.target)	&& container.has(e.target).length === 0){
+			jQuery("#notificationsDropdown").hide();
+			if(jQuery("#notificationsButton").hasClass("active-icon")){
+				jQuery("#notificationsButton").toggleClass("active-icon");
+			};
+		}
+	});
+
+	jQuery(document).click(function (e){
+		var container = jQuery("#searchDropdown, .gsc-completion-container, .gssb_c, #searchButton, .inpage-search-link");
+		if (!container.is(e.target)	&& container.has(e.target).length === 0){
+			if(!findCNadsTerminalParent(e.target)){
+				jQuery("#searchDropdown, .gsc-completion-container, .gssb_c").hide();
+				if(jQuery("#searchButton").hasClass("active-icon")){
+					jQuery("#searchButton").toggleClass("active-icon");
+				};
+			}
+		}
+	});
+
+	jQuery(document).click(function (e){
+		var container = jQuery("#profileDropdown, #btnProfile");
+		if (!container.is(e.target)	&& container.has(e.target).length === 0){
+			jQuery("#profileDropdown").hide();
+			if(jQuery("#btnProfile").hasClass("active-icon")){
+				jQuery("#btnProfile").toggleClass("active-icon");
+			};
+		}
+	});
+
+	jQuery(document).click(function (e){
+		var container = jQuery("#azDropdown, #azButton");
+		if (!container.is(e.target)	&& container.has(e.target).length === 0){
+			jQuery("#azDropdown").hide();
+			jQuery(".a-z-list ul").remove();
+			jQuery(".a-z-list a").removeClass("active-a-z-letter");
+			if(jQuery("#azButton").hasClass("active-icon")){
+				jQuery("#azButton").toggleClass("active-icon");
+			};
+		}
+	});
+
+	jQuery(".a-z-letters a").click(function() {
+		jQuery(".a-z-letters a").removeClass("active-a-z-letter");
+		jQuery(this).addClass("active-a-z-letter");
+	});
+
+	jQuery("#notificationsButton").click(function() {
+		jQuery("#notificationsDropdown").fadeToggle("fast");
+		jQuery(this).toggleClass("active-icon");
+	});
+
+	jQuery("#azButton").click(function() {
+		jQuery('html, body').animate({ scrollTop: 0 }, 0);
+		jQuery("#azDropdown").fadeToggle("fast");
+		jQuery("#azButton").blur();
+		jQuery(".a-z-letters a").focus();
+		//jQuery("#azButton").blur();
+		jQuery(this).toggleClass("active-icon");
+	});
+
+	jQuery("#searchButton, .inpage-search-link").click(function() {
+		jQuery(".search-dropdown").fadeToggle("fast");
+		jQuery("#searchButton").toggleClass("active-icon");
+		jQuery("#gsc-i-id1").focus();
+		jQuery(".gssb_c, .gsc-completion-container").show();
+		beginActiveSearchListener();
+	});
+
+	jQuery("#btnProfile").click(function() {
+		jQuery(this).toggleClass("active-icon");
+		jQuery("#profileDropdown").fadeToggle("fast");
+	});
+
+/*  Start Mega Menu   */
+
+	jQuery("#top-link-admissions").click(function() {
+		jQuery(this).addClass("top-link-active");
+		jQuery("#admissions-menu").show();
+		jQuery(".menu-line").show();
+	});
+
+	jQuery("#top-link-academics").click(function() {
+		jQuery(this).addClass("top-link-active");
+		jQuery("#academics-menu").show();
+		jQuery(".menu-line").show();
+	});
+
+	jQuery("#top-link-student-life").click(function() {
+		jQuery(this).addClass("top-link-active");
+		jQuery("#student-life-menu").show();
+		jQuery(".menu-line").show();
+	});
+
+	jQuery("#top-link-about-wsu").click(function() {
+		jQuery(this).addClass("top-link-active");
+		jQuery("#about-wsu-menu").show();
+		jQuery(".menu-line").show();
+	});
+
+
+	/*   Setting Tab Focus   */
+	jQuery("#top-link-admissions").click(function(e) {
+        jQuery("#admissions-menu a:first").focus();
+		jQuery("#admissions-menu a:last").blur(function(e){
+			jQuery("#top-link-admissions").focus();
+		});
+    });
+
+	jQuery("#top-link-academics").click(function(e) {
+        jQuery("#academics-menu a:first").focus();
+		jQuery("#academics-menu a:last").blur(function(e){
+			jQuery("#top-link-academics").focus();
+		});
+    });
+
+	jQuery("#top-link-student-life").click(function(e) {
+        jQuery("#student-life-menu a:first").focus();
+		jQuery("#student-life-menu a:last").blur(function(e){
+			jQuery("#top-link-student-life").focus();
+		});
+    });
+
+	jQuery("#top-link-about-wsu").click(function(e) {
+        jQuery("#about-wsu-menu a:first").focus();
+		jQuery("#about-wsu-menu a:last").blur(function(e){
+			jQuery("#top-link-about-wsu").focus();
+		});
+    });
+
+	jQuery(".mega-menu-top-links a:last").blur(function(e){
+
+		jQuery(".menu-line").hide();
+		jQuery("#admissions-menu").hide();
+		jQuery("#academics-menu").hide();
+		jQuery("#student-life-menu").hide();
+		jQuery("#about-wsu-menu").hide();
+
+		jQuery("#top-link-admissions").removeClass("top-link-active");
+		jQuery("#top-link-academics").removeClass("top-link-active");
+		jQuery("#top-link-student-life").removeClass("top-link-active");
+		jQuery("#top-link-about-wsu").removeClass("top-link-active");
+
+		jQuery("#skipToContent").focus();
+	});
+
+	jQuery(document).click(function (e){
+
+			var container = jQuery(".top-link");
+			if (!container.is(e.target)	&& container.has(e.target).length === 0){
+				jQuery(".menu-line").hide();
+			}
+
+			var container = jQuery("#admissions-menu, #top-link-admissions");
+			if (!container.is(e.target)	&& container.has(e.target).length === 0){
+				jQuery("#admissions-menu").hide();
+				container.removeClass("top-link-active");
+			}
+
+			var container = jQuery("#academics-menu, #top-link-academics");
+			if (!container.is(e.target)	&& container.has(e.target).length === 0){
+				jQuery("#academics-menu").hide();
+				container.removeClass("top-link-active");
+			}
+
+			var container = jQuery("#student-life-menu, #top-link-student-life");
+			if (!container.is(e.target)	&& container.has(e.target).length === 0){
+				jQuery("#student-life-menu").hide();
+				container.removeClass("top-link-active");
+			}
+
+			var container = jQuery("#about-wsu-menu, #top-link-about-wsu");
+			if (!container.is(e.target)	&& container.has(e.target).length === 0){
+				jQuery("#about-wsu-menu").hide();
+				container.removeClass("top-link-active");
+			}
+
+	});
+
+
+});
+
+var nMaxNads = 7;
+function findCNadsTerminalParent(obj) {
+	if(jQuery(obj).hasClass('gsq_a')) {
+		nMaxNads=7;
+		return true;
+	}
+
+	if(obj.parentElement==null)
+		{
+			nMaxNads=7;
+			return false;
+		}
+	else
+		{
+			nMaxNads -=1;
+			if(nMaxNads>0){
+			return findCNadsTerminalParent(obj.parentElement);}
+			else {return false;}
+		}
+
+//return jQuery(obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement).hasClass('gsq_a');
+
+}
+
+var oWatcher;
+function beginActiveSearchListener() {oWatcher = setInterval(function(){activeSearchPaneListener();},100);}
+function endActiveSearchListener() {clearInterval(oWatcher);}
+
+function activeSearchPaneListener() {
+	if(jQuery(".gsc-results-close-btn")!=null){
+		jQuery(".gsc-results-close-btn").attr("style", "position:fixed !important;");
+		endActiveSearchListener();
+	}
+}
+
+if (!Modernizr.svg) {
+	var imgs = document.getElementsByTagName('img');
+	var svgExtension = /.*\.svg$/
+	var l = imgs.length;
+	for(var i = 0; i < l; i++) {
+		if(imgs[i].src.match(svgExtension)) {
+			imgs[i].src = imgs[i].src.slice(0, -3) + 'png';
+			console.log(imgs[i].src);
+		}
+	}
+}

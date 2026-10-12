@@ -1,0 +1,86 @@
+# campus-lab-notes.txt
+# Practice file for the grep lesson
+# Bash Scripting — search this file with grep
+# Source ideas adapted from DigitalOcean grep tutorials:
+# https://www.digitalocean.com/community/tutorials/grep-command-in-linux-unix
+# https://www.digitalocean.com/community/tutorials/using-grep-regular-expressions-to-search-for-text-patterns-in-linux
+
+Welcome to Linux !
+Linux is a free and opensource Operating system that is mostly used by
+developers and in production servers for hosting crucial components such as web
+and database servers. Linux has also made a name for itself in PCs.
+Beginners looking to experiment with Linux can get started with friendlier linux
+distributions such as Ubuntu, Mint, Fedora and Elementary OS.
+
+===== AUTH LOG EXCERPT =====
+Oct 07 08:01:12 lab-gateway sshd[2210]: Failed password for invalid user admin from 10.4.12.18 port 51222 ssh2
+Oct 07 08:01:14 lab-gateway sshd[2211]: Failed password for root from 10.4.12.18 port 51228 ssh2
+Oct 07 08:02:03 lab-gateway sshd[2218]: Accepted password for student from 192.168.10.42 port 49811 ssh2
+Oct 07 08:04:41 web01 apache2[3301]: error: file not found /var/www/html/missing.html
+Oct 07 08:05:02 web01 apache2[3302]: warning: disk usage at 81 percent on /var
+Oct 07 08:05:19 db01 mysqld[1402]: ERROR 1045 (28000): Access denied for user 'app'@'10.0.0.8'
+Oct 07 08:06:55 lab-gateway sshd[2290]: Failed password for student from 10.4.12.18 port 51301 ssh2
+Oct 07 08:07:12 web01 apache2[3310]: notice: server resumed normal operations
+Oct 07 08:09:44 db01 mysqld[1402]: error: duplicate key on table users
+Oct 07 08:11:03 mail01 postfix[880]: status=sent (250 2.0.0 Ok: queued as A91F)
+Oct 07 08:12:17 web01 apache2[3318]: ERROR 404 for /favicon.ico from 172.16.8.9
+Oct 07 08:14:28 lab-gateway sshd[2401]: Accepted publickey for instructor from 192.168.10.2 port 50110 ssh2
+Oct 07 08:16:02 db01 mysqld[1402]: warning: slow query on orders took 4.2 seconds
+Oct 07 08:18:33 web01 apache2[3400]: error: permission denied for /var/log/apache2/error.log
+Oct 07 08:20:01 mail01 postfix[901]: status=bounced (user unknown)
+
+===== PACKAGE AND SERVICE NOTES =====
+openssh-server is installed on lab-gateway.
+OpenSSH client tools are also installed.
+The package name is openssh, not open alone.
+Apache is running. apache2 is the service unit name.
+Database server: MariaDB. The daemon name is mysqld.
+Backup job name: nightly-backup.sh
+Do not match the word open when the assignment asks for opensource.
+
+===== STUDENT ROSTER =====
+ada.lovelace@campus.edu,CS101,active
+alan.turing@campus.edu,CS201,active
+grace.hopper@campus.edu,CS101,waitlist
+linus.torvalds@campus.edu,CS301,active
+margaret.hamilton@campus.edu,CS201,inactive
+student@lab.local,CS101,active
+root@lab.local,staff,active
+
+===== IP AND PATH SAMPLES =====
+Gateway address is 192.168.10.1
+Student workstation is 192.168.10.42
+External probe came from 10.4.12.18
+Web server private address is 172.16.8.9
+Config path: /etc/ssh/sshd_config
+Web root: /var/www/html
+Log path: /var/log/auth.log
+Script path: /home/student/bin/nightly-backup.sh
+Price of the lab manual is $24.00 and tax is 6.5%.
+Version string: grep-3.11
+Ticket ids: INC-1042 INC-1043 INC-2201 REQ-88
+
+===== LICENSE SNIPPET =====
+Copyright (c) The Regents of the University of California.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. Neither the name of the University nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.
+
+===== END OF FILE =====
+developers finished the lab checklist.
+x
